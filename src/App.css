@@ -34,8 +34,11 @@ main {
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 10px 20px;
+  padding: 10px 30px;
   box-sizing: border-box;
+  background-color: #eeeeee;
+  border-left: 1px solid #d8d8d8;
+  border-right: 1px solid #d8d8d8;
 }
 
 main .threds-box {
@@ -78,6 +81,11 @@ main .title {
   background-color: #fff;
   box-shadow: #cfcfcf 0px 1px 1px 0px, #cfcfcf 0px 1px 1px 1px;
 }
+
+input[type="text"] {
+  padding: 10px;
+}
+
 
 footer {
   width: 100%;
