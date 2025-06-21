@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    /* 基本設定 */
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2020", // ES2022 のJavaScriptを使う
+    "useDefineForClassFields": true, // クラスの初期化を標準にする（？）
+    "lib": ["ES2020", "DOM", "DOM.Iterable"], // tsが使うグローバルAPI定義
+    "module": "ESNext", // ESModuleを使う(import/export)
+    "skipLibCheck": true, // ライブラリの型チェックをスキップ(ビルドが早くなる)
+
+    /* Bundler mode ビルドモード設定*/
+    "moduleResolution": "bundler", // モジュールの読み込み方法を変える（？）
+    "allowImportingTsExtensions": true, // .ts .tsxのインポートを許可
+    "verbatimModuleSyntax": true, // TSがimport文を変換しない（./lib.js → /libにしない）
+    "moduleDetection": "force", // 全ての./ts/.txsをモジュールとして扱う（？）
+    "noEmit": true, // コンパイルは出力しない
+    "jsx": "react-jsx", // 新しいJSX変換を使う
+
+    /* Linting 型チェック設定*/ 
+    "strict": true, // 厳密な型チェックを有効化
+    "noUnusedLocals": true, // 未使用の変数を検出
+    "noUnusedParameters": true, // 未使用の引数を検出
+    "erasableSyntaxOnly": true, // 型チェックで、importは型だけ調べる
+    "noFallthroughCasesInSwitch": true, // switch文を検出
+    "noUncheckedSideEffectImports": true // 副作用のあるimportが安全か調べる
+  },
+  "include": ["src"] // 対象のフォルダを指定
+}

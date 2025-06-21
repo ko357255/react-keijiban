@@ -1,0 +1,19 @@
+
+├── README.md
+├── gitignore    Gitに含めないファイルを定義する
+├── eslint.config.js  書き方を定義する
+├── package.json プロジェクトのパッケージの設定
+├── package-lock.json ↑の依存関係の管理ファイル
+├── index.html   HTMLのエントリーポイント
+├── public       静的ファイルを入れるフォルダ
+├── src          Reactのコンポーネントを入れるフォルダ
+│   ├── App.css
+│   ├── App.tsx   メインのコンポーネント
+│   ├── assets
+│   ├── index.css
+│   ├── main.tsx  アプリのメインファイル
+│   └── vite-env.d.ts
+├── tsconfig.json       Typescriptの設定
+├── tsconfig.app.json   アプリ用のts設定
+├── tsconfig.node.json  Node用のts設定
+└── vite.config.ts      Viteの設定
