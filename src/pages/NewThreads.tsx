@@ -45,7 +45,9 @@ function NewThreads() {
     <main>
       <div>
         <div className='threads-title-box'>
-          <h2 className='title'>スレッドを立てる</h2>
+          <h2 className='title'>
+            スレッドを立てる
+          </h2>
           <Link to={'/'} className='link-box'>
             <div>
               一覧に戻る
@@ -55,8 +57,8 @@ function NewThreads() {
       </div>
       <div>
         <form onSubmit={handleSubmit}>
-          <input name='title' type="text" value={title} placeholder='スレッド名' onChange={handleChange} className='input-new-threads'/>
-          <input type="submit" value='立てる' className='btn-new-threads'/>
+          <input name='title' type="text" value={title} placeholder='スレッド名' onChange={handleChange} className='input-new-threads' />
+          <input type="submit" value='立てる' className='btn-new-threads' />
         </form>
       </div>
     </main>

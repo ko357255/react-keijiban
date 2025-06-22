@@ -13,8 +13,9 @@ type PostGetResponse = {
 }
 
 function Threads() {
-  const [title, setTitle] = useState('スレッド名');
+  const [title, setTitle] = useState<string>('スレッド名');
   const [posts, setPosts] = useState<Post[]>([]);
+  const [postMessage, setPostMessage] = useState<string>('');
 
   // URLの:idを受け取る
   const { id } = useParams();
@@ -36,33 +37,67 @@ function Threads() {
     }
   }
 
+  const createPost = async () => {
+    const url = `https://railway.bulletinboard.techtrain.dev/threads/${id}/posts`;
+    try {
+      const res = await fetch(url, {
+        method: 'POST',
+        body: JSON.stringify({ post: postMessage }),
+      });
+
+      if (!res.ok) {
+        console.error(res.status, res.statusText);
+        return
+      }
+      setPostMessage('');
+      fetchPosts();
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   useEffect(() => {
     fetchPosts();
   }, []); // 初回描写時に実行
 
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setPostMessage(e.target.value);
+    console.log(e.target.value)
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    createPost();
+  }
 
   return (
     <main>
       <div>
         <div className='threads-title-box'>
-          <h2 className='title'>{title}</h2>
+          <h2 className='title'>
+            {title}
+          </h2>
           <Link to={'/'} className='link-box'>
             <div>
-              スレッド一覧に戻る
+              一覧に戻る
             </div>
           </Link>
         </div>
       </div>
+      <form onSubmit={handleSubmit} className='post-form'>
+        <textarea
+          name="post" id="post" placeholder='コメント'
+          rows={5} cols={40}
+          value={postMessage} onChange={handleChange} />
+        <input type="submit" value='投稿'/>
+      </form>
       <div>
         <table className='posts-table'>
           <tbody>
-            {posts.map((post, i) => (
+            {posts.map((post) => (
               <tr key={post.id}>
                 <td>
                   <div className='post-item'>
-                    <div className='post-num'>
-                      {i + 1}
-                    </div>
                     <div className='post-message'>
                       {post.post}
                     </div>
