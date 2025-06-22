@@ -12,7 +12,7 @@ type PostGetResponse = {
   posts: Post[],
 }
 
-function Threads() {
+const Threads = () => {
   const [title, setTitle] = useState<string>('スレッド名');
   const [posts, setPosts] = useState<Post[]>([]);
   const [postMessage, setPostMessage] = useState<string>('');
@@ -43,6 +43,9 @@ function Threads() {
       const res = await fetch(url, {
         method: 'POST',
         body: JSON.stringify({ post: postMessage }),
+        headers: {
+          'Content-Type': 'application/json',
+        }
       });
 
       if (!res.ok) {
@@ -67,6 +70,10 @@ function Threads() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (postMessage.trim() == '') {
+      alert('コメントを入力してください');
+      return;
+    }
     createPost();
   }
 
@@ -89,25 +96,23 @@ function Threads() {
           name="post" id="post" placeholder='コメント'
           rows={5} cols={40}
           value={postMessage} onChange={handleChange} />
-        <input type="submit" value='投稿'/>
+        <input type="submit" value='投稿' />
       </form>
-      <div>
-        <table className='posts-table'>
-          <tbody>
-            {posts.map((post) => (
-              <tr key={post.id}>
-                <td>
-                  <div className='post-item'>
-                    <div className='post-message'>
-                      {post.post}
-                    </div>
+      <table className='posts-table'>
+        <tbody>
+          {posts.map((post) => (
+            <tr key={post.id}>
+              <td>
+                <div className='post-item'>
+                  <div className='post-message'>
+                    {post.post}
                   </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </main>
   )
 }

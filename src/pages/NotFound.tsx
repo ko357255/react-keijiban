@@ -1,6 +1,6 @@
 
 
-function NotFound() {
+const NotFound = () => {
   return (
     <main>
       <div>

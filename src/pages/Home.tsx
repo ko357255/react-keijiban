@@ -6,7 +6,7 @@ type Thread = {
   title: string,
 }
 
-function Home() {
+const Home = () => {
 
   const [threads, setThreads] = useState<Thread[]>([]);
 
