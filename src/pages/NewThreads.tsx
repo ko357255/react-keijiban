@@ -47,16 +47,15 @@ function NewThreads() {
           <h2 className='title'>スレッドを立てる</h2>
           <Link to={'/'} className='link-box'>
             <div>
-              戻る
+              一覧に戻る
             </div>
           </Link>
         </div>
       </div>
       <div>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="title">スレッド名</label>
-          <input name='title' type="text" value={title} placeholder='スレッド名' onChange={handleChange} />
-          <input type="submit" value='決定' />
+          <input name='title' type="text" value={title} placeholder='スレッド名' onChange={handleChange} className='input-new-threds'/>
+          <input type="submit" value='立てる' className='btn-new-threds'/>
         </form>
       </div>
     </main>

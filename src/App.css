@@ -83,7 +83,21 @@ main .title {
 }
 
 input[type="text"] {
-  padding: 10px;
+  padding: 6px;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  padding: 6px 8px;
+}
+
+.input-new-threds {
+  width: 100%;
+  margin: 10px 0 20px 0;
+}
+
+.btn-new-threds {
+  width: 100%;
 }
 
 
