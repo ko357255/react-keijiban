@@ -1,14 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
-type Thread = {
-  id: string,
-  title: string,
-}
+import ThreadItem from '../components/ThreadItem';
+import type { ThreadData } from '../types/types';
 
 const Home = () => {
-
-  const [threads, setThreads] = useState<Thread[]>([]);
+  const [threads, setThreads] = useState<ThreadData[]>([]);
 
   // スレッド一覧の取得処理
   const fetchThreads = async () => {
@@ -23,7 +19,7 @@ const Home = () => {
         console.error(res.status, res.statusText);
         return
       }
-      const data: Thread[] = await res.json();
+      const data: ThreadData[] = await res.json();
       setThreads(data);
     } catch (e) {
       console.error(e);
@@ -50,15 +46,7 @@ const Home = () => {
           <tbody>
             {/* thread配列を繰り返し、テーブル化する */}
             {threads.map((thread) => (
-              <tr key={thread.id}>
-                <td>
-                  <Link to={`/threads/${thread.id}`}>
-                    <div className='thred-item'>
-                      {thread.title}
-                    </div>
-                  </Link>
-                </td>
-              </tr>
+              <ThreadItem thread={thread} key={thread.id}/>
             ))}
           </tbody>
         </table>

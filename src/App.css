@@ -85,14 +85,14 @@ input[type="submit"] {
   width: 100%;
 }
 
-.threads-table .thred-item {
+.threads-table .thread-item {
   margin-bottom: 8px;
   padding: 10px;
   background-color: #fff;
   border: 1px solid #acacac;
 }
 
-.threads-table .thred-item:hover {
+.threads-table .thread-item:hover {
   color: #fff;
   background-color: #808080;
 }
@@ -108,7 +108,7 @@ input[type="submit"] {
   width: 100%;
 }
 
-/* Threds */
+/* Threads */
 
 .post-form {
   display: flex;
