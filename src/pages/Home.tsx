@@ -15,14 +15,19 @@ const Home = () => {
     const url = `https://railway.bulletinboard.techtrain.dev/threads?offset=${offset}`;
     try {
       const res = await fetch(url);
-      if (!res.ok) {
-        console.error(res.status, res.statusText);
-        return
+      if (!res.ok) { // APIのエラー 404とか500とか
+        // エラーを発生させる
+        // error.message に格納される
+        throw new Error(`Error: ${res.statusText}`);
       }
       const data: ThreadData[] = await res.json();
       setThreads(data);
-    } catch (e) {
-      console.error(e);
+    } catch (error: any) { // エラーの処理
+      console.error(error);
+      
+    } finally {
+      // try-catchで最後に実行される
+
     }
   }
 
@@ -46,7 +51,7 @@ const Home = () => {
           <tbody>
             {/* thread配列を繰り返し、テーブル化する */}
             {threads.map((thread) => (
-              <ThreadItem thread={thread} key={thread.id}/>
+              <ThreadItem thread={thread} key={thread.id} />
             ))}
           </tbody>
         </table>
