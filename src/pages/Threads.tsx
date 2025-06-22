@@ -1,20 +1,14 @@
 
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import PostItem from '../components/PostItem';
+import type { PostData, PostGetResponse } from '../types/types';
 
-type Post = {
-  id: string,
-  post: string,
-}
 
-type PostGetResponse = {
-  threadId: string,
-  posts: Post[],
-}
 
 const Threads = () => {
   const [title, setTitle] = useState<string>('スレッド名');
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<PostData[]>([]);
   const [postMessage, setPostMessage] = useState<string>('');
 
   // URLの:idを受け取る
@@ -101,15 +95,7 @@ const Threads = () => {
       <table className='posts-table'>
         <tbody>
           {posts.map((post) => (
-            <tr key={post.id}>
-              <td>
-                <div className='post-item'>
-                  <div className='post-message'>
-                    {post.post}
-                  </div>
-                </div>
-              </td>
-            </tr>
+            <PostItem post={post} key={post.id}/>
           ))}
         </tbody>
       </table>
