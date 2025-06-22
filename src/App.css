@@ -41,13 +41,13 @@ main {
   border-right: 1px solid #d8d8d8;
 }
 
-main .threds-box {
+main .threads-box {
   width: 100%;
   margin: 0 auto;
 }
 
 
-main .threds-title-box {
+main .threads-title-box {
   display: flex;
   align-items: center;
   margin: 0 0 5px 10px;
@@ -60,7 +60,7 @@ main .title {
 .link-box {
   width: 150px;
   margin-left: auto;
-  padding: 3px 2px;
+  padding: 4px 2px;
   text-align: center;
   border-radius: 3px;
   color: #fff;
@@ -71,16 +71,42 @@ main .title {
   background-color: #575757;
 }
 
-.threds-table {
+.threads-table {
   width: 100%;
 }
 
-.threds-table .thred-item {
+.threads-table .thred-item {
   margin-bottom: 8px;
   padding: 10px;
   background-color: #fff;
   box-shadow: #cfcfcf 0px 1px 1px 0px, #cfcfcf 0px 1px 1px 1px;
 }
+
+.threads-table .thred-item:hover {
+  color: #fff;
+  background-color: #808080;
+}
+
+.posts-table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.posts-table .post-item {
+  margin-bottom: 8px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid;
+}
+
+.post-num {
+  
+}
+
+.post-message {
+
+}
+
 
 input[type="text"] {
   padding: 6px;
@@ -91,12 +117,12 @@ input[type="submit"] {
   padding: 6px 8px;
 }
 
-.input-new-threds {
+.input-new-threads {
   width: 100%;
   margin: 10px 0 20px 0;
 }
 
-.btn-new-threds {
+.btn-new-threads {
   width: 100%;
 }
 

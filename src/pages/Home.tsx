@@ -38,7 +38,7 @@ function Home() {
   return (
     <main>
       <div>
-        <div className='threds-title-box'>
+        <div className='threads-title-box'>
           <h2 className='title'>スレッド一覧</h2>
           <Link to={'/threads/new'} className='link-box'>
             <div>
@@ -46,15 +46,17 @@ function Home() {
             </div>
           </Link>
         </div>
-        <table className='threds-table'>
+        <table className='threads-table'>
           <tbody>
             {/* thread配列を繰り返し、テーブル化する */}
             {threads.map((thread) => (
               <tr key={thread.id}>
                 <td>
-                  <div className='thred-item'>
-                    {thread.title}
-                  </div>
+                  <Link to={`/threads/${thread.id}`}>
+                    <div className='thred-item'>
+                      {thread.title}
+                    </div>
+                  </Link>
                 </td>
               </tr>
             ))}

@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 function NewThreads() {
   const [title, setTitle] = useState('');
 
+  // 遷移関数の定義
   const navigate = useNavigate();
 
   const createThreads = async () => {
@@ -35,7 +36,7 @@ function NewThreads() {
     createThreads();
   }
 
-  // 
+  // 入力の変化を受け取り、代入する
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   }
@@ -43,7 +44,7 @@ function NewThreads() {
   return (
     <main>
       <div>
-        <div className='threds-title-box'>
+        <div className='threads-title-box'>
           <h2 className='title'>スレッドを立てる</h2>
           <Link to={'/'} className='link-box'>
             <div>
@@ -54,8 +55,8 @@ function NewThreads() {
       </div>
       <div>
         <form onSubmit={handleSubmit}>
-          <input name='title' type="text" value={title} placeholder='スレッド名' onChange={handleChange} className='input-new-threds'/>
-          <input type="submit" value='立てる' className='btn-new-threds'/>
+          <input name='title' type="text" value={title} placeholder='スレッド名' onChange={handleChange} className='input-new-threads'/>
+          <input type="submit" value='立てる' className='btn-new-threads'/>
         </form>
       </div>
     </main>
