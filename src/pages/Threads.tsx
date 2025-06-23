@@ -1,15 +1,15 @@
 
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import PostItem from '../components/PostItem';
+import { useParams } from 'react-router-dom';
 import type { PostData, PostGetResponse } from '../types/types';
-
+import PostItem from '../components/PostItem';
+import ThreadTitle from '../components/ThreadTitle';
 
 
 const Threads = () => {
-  const [title, setTitle] = useState<string>('スレッド名');
   const [posts, setPosts] = useState<PostData[]>([]);
   const [postMessage, setPostMessage] = useState<string>('');
+  const title = 'スレッド名';
 
   // URLの:idを受け取る
   const { id } = useParams();
@@ -73,18 +73,7 @@ const Threads = () => {
 
   return (
     <main>
-      <div>
-        <div className='threads-title-box'>
-          <h2 className='title'>
-            {title}
-          </h2>
-          <Link to={'/'} className='link-box'>
-            <div>
-              一覧に戻る
-            </div>
-          </Link>
-        </div>
-      </div>
+      <ThreadTitle title={title} toTitle='一覧に戻る' to={'/'}/>
       <form onSubmit={handleSubmit} className='post-form'>
         <textarea
           name="post" id="post" placeholder='コメント'

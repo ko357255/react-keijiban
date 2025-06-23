@@ -39,6 +39,17 @@ main .title {
   font-size: 1.6rem;
 }
 
+.threads-box {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.threads-title-box {
+  display: flex;
+  align-items: center;
+  margin: 0 0 8px 0;
+}
+
 footer {
   width: 100%;
   height: 60px;
@@ -73,17 +84,6 @@ input[type="submit"] {
 }
 
 /* Home */
-
-.threads-box {
-  width: 100%;
-  margin: 0 auto;
-}
-
-.threads-title-box {
-  display: flex;
-  align-items: center;
-  margin: 0 0 5px 10px;
-}
 
 .threads-table {
   width: 100%;

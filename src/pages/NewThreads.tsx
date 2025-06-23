@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import ThreadTitle from '../components/ThreadTitle';
 
 const NewThreads = () => {
   const [title, setTitle] = useState('');
@@ -50,18 +51,7 @@ const NewThreads = () => {
 
   return (
     <main>
-      <div>
-        <div className='threads-title-box'>
-          <h2 className='title'>
-            スレッドを立てる
-          </h2>
-          <Link to={'/'} className='link-box'>
-            <div>
-              一覧に戻る
-            </div>
-          </Link>
-        </div>
-      </div>
+      <ThreadTitle title='スレッドを立てる' toTitle='一覧に戻る' to='/'/>
       <div>
         <form onSubmit={handleSubmit}>
           <input name='title' type="text" value={title} placeholder='スレッド名' onChange={handleChange} className='input-new-threads' />

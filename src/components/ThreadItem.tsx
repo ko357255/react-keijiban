@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import type { ThreadData } from '../types/types';
 
-
 const ThreadItem = ({ thread }: { thread: ThreadData }) => {
   return (
     <tr key={thread.id}>
