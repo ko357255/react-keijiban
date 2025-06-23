@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import type { PostData, PostGetResponse } from '../types/types';
 import PostItem from '../components/PostItem';
@@ -9,27 +9,37 @@ import ThreadTitle from '../components/ThreadTitle';
 const Threads = () => {
   const [posts, setPosts] = useState<PostData[]>([]);
   const [postMessage, setPostMessage] = useState<string>('');
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const title = 'スレッド名';
 
   // URLの:idを受け取る
   const { id } = useParams();
 
-  const fetchPosts = async () => {
+  // Reactで関数を定義すると、再レンダリングの度に関数が新しく作られてしまう
+  // useCallback() を使うと依存の更新がない限り、使い続けられる
+  const fetchPosts = useCallback(async () => {
     const offset = 0;
-    const url = `https://railway.bulletinboard.techtrain.dev//threads/${id}/posts?offset=${offset}`;
+    const url = `https://railway.bulletinboard.techtrain.dev/threads/${id}/posts?offset=${offset}`;
     try {
       const res = await fetch(url);
       if (!res.ok) {
-        console.error(res.status, res.statusText);
-        return
+        throw new Error(`Error: ${res.statusText}`);
       }
       const data: PostGetResponse = await res.json();
       setPosts(data.posts);
       console.log(data.posts)
     } catch (e) {
       console.error(e);
+      if (e instanceof Error) {
+        setError(e.message);
+      } else {
+        setError('Error: Unknown');
+      }
+    } finally {
+      setLoading(false);
     }
-  }
+  }, [id]); // スレッドIDが変わるたびに関数を作る
 
   const createPost = async () => {
     const url = `https://railway.bulletinboard.techtrain.dev/threads/${id}/posts`;
@@ -55,7 +65,8 @@ const Threads = () => {
 
   useEffect(() => {
     fetchPosts();
-  }, []); // 初回描写時に実行
+  }, [fetchPosts]);
+  // fetchPosts(useCallback) が変わったとき(=IDが変わったとき)に実行する
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPostMessage(e.target.value);
@@ -73,7 +84,7 @@ const Threads = () => {
 
   return (
     <main>
-      <ThreadTitle title={title} toTitle='一覧に戻る' to={'/'}/>
+      <ThreadTitle title={title} toTitle='一覧に戻る' to={'/'} />
       <form onSubmit={handleSubmit} className='post-form'>
         <textarea
           name="post" id="post" placeholder='コメント'
@@ -83,9 +94,30 @@ const Threads = () => {
       </form>
       <table className='posts-table'>
         <tbody>
-          {posts.map((post) => (
-            <PostItem post={post} key={post.id}/>
-          ))}
+          {loading ? (
+            <tr>
+              <td>
+                loading...
+              </td>
+            </tr>
+
+          ) : error ? (
+            <tr>
+              <td className='error'>
+                {error}
+              </td>
+            </tr>
+          ) : posts.length == 0 ? (
+            <tr>
+              <td>
+                まだレスはないようです..
+              </td>
+            </tr>
+          ) : (
+            posts.map((post) => (
+              <PostItem post={post} key={post.id} />
+            ))
+          )}
         </tbody>
       </table>
     </main>
